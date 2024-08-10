@@ -1,0 +1,20 @@
+FROM registry.access.redhat.com/ubi8/nodejs-18-minimal
+USER root
+RUN microdnf update -y && microdnf install -y shadow-utils && microdnf remove -y nodejs-nodemon && microdnf clean all
+
+RUN groupadd -g 1001 mockopenapi
+RUN useradd -u 1000 -g 1001 -s /bin/bash mockopenapi
+USER 1000
+
+COPY --chown=1000:1001 package.json /opt/app/resources/
+COPY --chown=1000:1001 index.js /opt/app/resources/
+COPY --chown=1000:1001 src/ /opt/app/resources/src
+
+WORKDIR /opt/ibm/app
+
+USER root
+RUN npm install --omit=dev
+
+USER 1000
+EXPOSE 8080
+ENTRYPOINT ["node", "index.js"]

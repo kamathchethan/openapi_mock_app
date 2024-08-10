@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: mockopenapi
+  namespace: mockopenapi
+spec:
+  to:
+    kind: Service
+    name: mockopenapi
+    weight: 100
+  port:
+    targetPort: mockopenapi
+  tls:
+    termination: edge    

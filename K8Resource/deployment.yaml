@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mockopenapi
+  name: mockopenapi
+spec:
+  selector:
+    matchLabels:
+      app: mockopenapi
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mockopenapi
+    spec:
+      volumes:
+        - name: resources
+          configMap:
+            name: mockopenapi
+      containers:
+        - name: mockopenapi
+          image: << >>
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: resources
+              readOnly: true
+              mountPath: /opt/app/resources/
+      imagePullSecrets: 
+        - name: mockopenapi

@@ -1,0 +1,94 @@
+{
+  "name": "openapi_mock_app",
+  "version": "1.0.0",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kamathchethan/openapi_mock_app.git"
+  },
+  "description": "Express application to mock API's using OpenAPI specification and examples",
+  "keywords": [
+    "swagger",
+    "openapi",
+    "open-api",
+    "json",
+    "yaml",
+    "mock",
+    "specification",
+    "express",
+    "ui",
+    "json",
+    "documentation"
+  ],
+  "author": {
+    "name": "Chethan P",
+    "url": "https://github.com/kamathchethan"
+  },
+  "type": "module",
+  "exports": "./index.js",
+  "scripts": {
+    "start": "node index.js",
+    "lint": "standard --verbose --fix",
+    "pretest": "npm run lint",
+    "test": "c8 ./node_modules/.bin/mocha test/*.spec.js --exit",
+    "posttest": "istanbul-badges-readme --coverageDir='./.coverage'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test"
+    }
+  },
+  "c8": {
+    "include": [
+      "src/*.js"
+    ],
+    "exclude": [
+      "test/*.js",
+      "node_modules"
+    ],
+    "reporter": [
+      "json-summary"
+    ],
+    "report-dir": "./.coverage",
+    "all": true,
+    "exclude-after-remap": true,
+    "check-coverage": true,
+    "branches": 82,
+    "functions": 90,
+    "lines": 90,
+    "statements": 90,
+    "clean": true
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "lodash.merge": "^4.6.2",
+    "swagger-parser": "^10.0.3",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "c8": "^10.1.2",
+    "husky": "^9.1.4",
+    "istanbul-badges-readme": "^1.9.0",
+    "mocha": "^10.4.0",
+    "standard": "^17.0.0",
+    "supertest": "^7.0.0"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "context",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach",
+      "it",
+      "expect"
+    ],
+    "env": {
+      "mocha": true,
+      "node": true
+    }
+  }
+}

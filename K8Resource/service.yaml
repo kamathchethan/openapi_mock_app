@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: mockopenapi
+  namespace: mockopenapi
+spec:
+  ports:
+    - name: mockopenapi
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+  selector:
+    app: mockopenapi
